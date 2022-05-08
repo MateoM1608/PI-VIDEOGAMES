@@ -1,26 +1,32 @@
 import React, {useEffect} from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { useParams, useHistory } from 'react-router-dom';
 import {useSelector, useDispatch,} from 'react-redux';
 import {getVideogameById, clearDetails} from '../../redux/actions/index'
 import './DetailVideogame.css'
+import Logo from '../../img/logo.png'
 
 const DetailVideogame = () =>{
 
     const videogameDetail = useSelector(state => state.videogameDetail)
     const { id } = useParams()
     const dispatch = useDispatch()
+    const history = useHistory()
     
+    const handleClick = () =>{
+        history.push("/Home")
+        dispatch(clearDetails())
+    }
     useEffect(()=>{
         dispatch(getVideogameById(id))
     },[dispatch])
 
-console.log('imageni',videogameDetail)
     return(
         <div className='divTotalDetail'>
             <div className='divHomeDetail'>
-            <Link style={{textDecoration:"none"}} to="/Home">
+            {/* <Link style={{textDecoration:"none"}} to="/Home">
                 <p className="txtHomeDetail" onClick={() => dispatch(clearDetails())}>BACK</p>
-            </Link>
+            </Link> */}
+            <img src={Logo} alt="img" onClick={handleClick} className="LogoDetail"/>
             </div>
             {videogameDetail.name ?
             <div className='divDetail'>

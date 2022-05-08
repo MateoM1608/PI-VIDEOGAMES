@@ -21,7 +21,7 @@ function rootReducer(state = initialState, action) {
           ...state,
           videogames: action.payload,
         }
-      }break;
+      }
     case "GET_VIDEOGAME_ID":
       console.log('detalle', action.payload)
       return {
@@ -45,7 +45,7 @@ function rootReducer(state = initialState, action) {
           ...state,
           videogames: filterByGenres,
         }
-      }break;
+      }
     case "FILTER_BYVIDEOGAME":
       const videogameCreated = state.allVideogames;
       const filterByvideogame = action.payload === "Created"
@@ -59,7 +59,7 @@ function rootReducer(state = initialState, action) {
           ...state,
           videogames: filterByvideogame,
         }
-      }break;
+      }
     case "ORDER_ALPHABET":
         const orderAlphabet = state.videogames.slice().sort((a,b) => {
             if(a.name.toLowerCase() > b.name.toLowerCase()){

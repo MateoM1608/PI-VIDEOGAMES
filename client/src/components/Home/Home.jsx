@@ -1,7 +1,6 @@
 import React, {useEffect, useState} from 'react';
-// import { Link } from 'react-router-dom';
 import { useDispatch, useSelector} from 'react-redux';
-import {getVideogames, getGenres, orderByAlphabet, orderByRating, filterByVieogame, filterByGenres, reload} from '../../redux/actions/index';
+import { getVideogames, getGenres, orderByAlphabet, orderByRating, filterByVieogame, filterByGenres, reload} from '../../redux/actions/index';
 import './Home.css'
 
 import NavBar from '../NavBar/NavBar';
@@ -15,63 +14,84 @@ const Home = () => {
 
     const dispatch = useDispatch()
     const Allgenres = useSelector(estado => estado.genres)
+    const videogames = useSelector(state => state.videogames)
     const [pageAnt, setPageAnt] = useState(0)
     const [pagePost, setPagePost] = useState(15)
     const [currentPage, setCurrentPage] = useState(1)
+    const [values, setValue] = useState({
+        genres: "",
+        create: "",
+        name: "",
+        reating: ""
+    })
 
-    const videogames = useSelector(state => state.videogames)
     let pageslice = videogames.slice(pageAnt, pagePost)
     
     useEffect(()=>{
         dispatch(getGenres())
+        dispatch(getVideogames())
     },[dispatch])
 
-    console.log('videogames',videogames)
-    const numPages = () => {
-        let number = []
-        for(let i = 0; i < Math.ceil(videogames.length/15); i++){   
-            number.push(i+1)
-        }
-        return number
+   
+    let number = []
+    for(let i = 0; i < Math.ceil(videogames.length/15); i++){   
+        number.push(i+1)
     }
-    const numberPages = numPages()
-    console.log('numeros pag' ,numberPages)
-    
-
+        
     const prevPage = () =>{
         if(currentPage > 1){
             pages(currentPage-1)
         }
     }
-
     const nextPage = () =>{
-        if(currentPage < numPages().length ){
+        if(currentPage < number.length ){
             pages(currentPage+1)
         }
     }
-
-
-    
     const handleByName = (e) => {
         dispatch(orderByAlphabet(e.target.value))
         pages(1)
+        setValue({
+            ...values,
+            genres: "",
+            create: "",
+            name: e.target.value,
+            rating: ""
+        })
     }
-
     const handleByRating = (e) => {
         dispatch(orderByRating(e.target.value))
         pages(1)
+        setValue({
+            ...values,
+            genres: "",
+            create: "",
+            name: "",
+            rating: e.target.value
+        })
     }
-
     const handleByCreate = (e) => {
         dispatch(filterByVieogame(e.target.value))
         pages(1)
+        setValue({
+            ...values,
+            genres: "",
+            create: e.target.value,
+            name: "",
+            rating: ""
+        })
     }
-    
     const handleByGenres = (e) =>{
         dispatch(filterByGenres(e.target.value))
         pages(1)
+        setValue({
+            ...values,
+            genres: e.target.value,
+            create: "",
+            name: "",
+            rating: ""
+        })
     }
-    
     const pages = (page) =>{
         console.log('ejecutado')
         
@@ -87,33 +107,40 @@ const Home = () => {
         setCurrentPage(page)
         
     }
-    
     const Reload = () =>{
         dispatch(reload())
         pages(1)
     }
 
+
     return (
         <div className='divHome'>
             <NavBar/>
             <div className='filters'>
-                <OrderBy handleByName={handleByName}  handleByRating={handleByRating}/>
-                <Filter handleByCreate={handleByCreate} handleByGenres={handleByGenres} Allgenres={Allgenres}/>
+                <OrderBy 
+                    handleByName={handleByName} 
+                    handleByRating={handleByRating} 
+                    values={values}
+                />
+                <Filter 
+                    handleByCreate={handleByCreate} 
+                    handleByGenres={handleByGenres} 
+                    Allgenres={Allgenres} values={values}
+                />
                 <button className="btnFilter" onClick={() =>Reload()}>Reload</button>
             </div>
-                {
-                pageslice.length > 0 ?
+                {pageslice.length > 0 ?
                     <div>
                         <Paginate 
                             pages={pages} 
                             videogames={videogames} 
-                            numberPages={numberPages} 
+                            numberPages={number} 
                             currentPage={currentPage} 
                             prevPage={prevPage} 
                             nextPage={nextPage}
                         />
                         <div className='cards'>
-                            {pageslice.map((v,index)=>(
+                            {pageslice.map(v=>(
                                 <CardVideogame
                                     name={v.name}
                                     Genres={v.Genres}
@@ -128,7 +155,7 @@ const Home = () => {
                         <Paginate 
                             pages={pages} 
                             videogames={videogames} 
-                            numberPages={numberPages} 
+                            numberPages={number} 
                             currentPage={currentPage} 
                             prevPage={prevPage} 
                             nextPage={nextPage}

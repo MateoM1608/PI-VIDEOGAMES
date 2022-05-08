@@ -15,7 +15,7 @@ export const getVideogameById =(id) => dispatch =>{
     .then(res => dispatch({type: "GET_VIDEOGAME_ID", payload: res.data}))
 }
 
-export const createVideogame = (body) => dispatch =>{
+export const createVideogame = (body) => () =>{
     axios.post(`http://localhost:3001/videogame`, body)
     .then(res => res)
 }

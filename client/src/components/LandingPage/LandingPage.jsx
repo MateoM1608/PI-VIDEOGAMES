@@ -4,6 +4,7 @@ import { useEffect } from 'react';
 import { getVideogames } from '../../redux/actions/index'
 import { useDispatch } from 'react-redux';
 import './LandingPage.css'
+import Logo from '../../img/logo.png'
 
 const LandingPage = () => {
 
@@ -16,7 +17,11 @@ const LandingPage = () => {
 
     return(
         <div className='screen'>
+            <div  >
+            <img src={Logo} className="logoland" />
+            </div>
             <div className='position'>
+                
                 <h2 className='title'>
                     Just play. Have fun
                 </h2>

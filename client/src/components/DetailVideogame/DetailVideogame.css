@@ -5,6 +5,15 @@
     border-radius: 15px;
 }
 
+.LogoDetail{
+    cursor: pointer;
+    margin: 15px 15px 15px 20px;
+    width: 200px;
+}
+.LogoDetail:hover{
+    width: 210px;
+}
+
 .divTotalDetail{
     background: black;
     display: flex;
