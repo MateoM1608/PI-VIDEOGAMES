@@ -1,0 +1,22 @@
+.content-select{
+    margin-left: 50px;
+    width: 100%;
+    cursor: pointer;
+  	padding: 7px 10px;
+	background: black;
+	color: rgba(255, 255, 255, 0.507);
+	font-size: 1em;
+    width: 170px;
+	border:2px solid black;
+}
+
+
+.content-select:hover{
+    color: white;
+    font-size: 1.06em;
+}
+
+.orderFilter{
+    display: flex;
+    flex-direction: row;
+}

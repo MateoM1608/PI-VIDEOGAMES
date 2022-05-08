@@ -1,0 +1,163 @@
+.divTotCreate{
+    background: rgba(0, 0, 0, 0.76)  url("https://areajugones.sport.es/wp-content/uploads/2020/04/1043984.jpg");
+    height: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-blend-mode: darken;
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 50px;
+}
+
+.itemsrequired{
+    color: white;
+    text-align: center;
+}
+.divtxtHome{
+    background-color: rgba(0, 0, 0, 0.788);
+}
+
+.txtHome{
+    padding-left: 25px;
+    padding-right: 25px;
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.txtHome:hover{
+    color: rgba(0, 255, 255, 0.144);
+}
+
+.txtCreated{
+    text-align: center;
+    color: white;
+    font-size: 50px;
+    margin-top: -0px
+}
+
+.divimagecreate{
+    margin-top: 80px;
+}
+.imgCreate{
+    height: 220px;
+    width: 355px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 30px rgba(252, 252, 252, 0.521);
+}
+
+.divCreate{
+    background-color: rgba(0, 0, 0, 0.582);
+    margin-left: 50px;
+    margin-right: 50px;
+    border-radius: 30px;
+    margin-top: -30px;
+}
+
+.orderForm{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.columForm{
+    display: flex;
+    flex-direction: column;
+}
+
+.rowForm{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.rowText{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 400px;
+}
+
+.TextSelect{
+    color: rgba(255, 255, 255, 0.555);
+    font-size: 12px;
+}
+
+.txtSelectrow{
+    display: flex;
+    flex-direction: row;
+    margin-right: 8px;
+    margin-bottom: -18px;
+    margin-top: -8px;
+}
+
+.btndeleteSelect{
+    margin-left: 3px;
+    padding: 0px;
+    background-color: transparent;
+    color: rgb(141, 0, 0);
+    border: 0px;
+    cursor: pointer;
+}
+
+.AllForms{
+    margin-top: 40px;
+    margin-left: 60px;
+}
+
+.btnCreate{
+    padding: 10px;
+    border-radius: 10px;
+    font-size: 15px;
+    cursor: pointer;
+    border: 1px solid rgba(0, 255, 255, 0.144);
+    color: white;
+    background-color: rgba(0, 255, 255, 0.144);
+}
+
+.btnCreate:hover{
+    font-size: 17px;
+    color: black;
+    box-shadow: 0px 0px 30px rgba(252, 252, 252, 0.521);
+}
+
+.orderBtnCreate{
+    padding-top: 50px;
+    padding-bottom: 50px;
+    display: flex;
+    justify-content: center;
+}
+
+.letterForms{
+    color: white;
+    font-size: 20px;
+    padding-bottom: 5px;
+    text-align: center;
+}
+
+.textbox{
+    border: 1px solid black;
+    padding: 7px;
+    border-radius: 8px;
+    background-color: rgba(255, 255, 255, 0.507);   
+}
+
+.textbox::placeholder{
+    color: rgba(0, 0, 0, 0.74)
+}
+
+.orderSelect{
+    margin-top: 24px;
+}
+
+.danger{
+    color: red;
+    font-size: 12px;
+    text-align: center;
+}
+
+.inputimg{
+    width: 220px;
+}
