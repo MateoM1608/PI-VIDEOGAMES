@@ -8,8 +8,6 @@ require('./db.js');
 
 const server = express();
 
-// var cors = require('cors');
-// server.use(cors());
 
 server.name = 'API';
 

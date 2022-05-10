@@ -4,14 +4,12 @@ const { Op } = require('sequelize');
 const { API_KEY } = process.env
 
 const getAllVideogames = async (req,res,next) =>{
-    
+
     const { name } = req.query;
-    let dataBaseVideogames;
-    let APIVIdeogames;
     
     if(name){
         try{
-            dataBaseVideogames = await Videogame.findAll({
+            const dataBaseVideogames = await Videogame.findAll({
                 where :{
                     name :{
                         [Op.iLike] : `%${name}%`
@@ -21,7 +19,7 @@ const getAllVideogames = async (req,res,next) =>{
     
             let resultVideogames = await axios.get(`https://api.rawg.io/api/games?search=${name}&key=${API_KEY}`);
 
-            APIVIdeogames = resultVideogames.data.results.length > 0
+            const APIVIdeogames = resultVideogames.data.results.length > 0
             ? resultVideogames.data.results.map(e =>{
                 return {
                     id: e.id,
@@ -33,9 +31,9 @@ const getAllVideogames = async (req,res,next) =>{
                 }
             }): [];
             
-            const allVideogames = [...dataBaseVideogames, ... APIVIdeogames];
+            const allVideogames = dataBaseVideogames.concat(APIVIdeogames)
             if(allVideogames.length === 0){
-                return res.send("Videogame has not found")
+                return res.send("Videogame not found")
             }
             if(allVideogames.length <= 15){
                 return res.json(allVideogames)
@@ -49,7 +47,7 @@ const getAllVideogames = async (req,res,next) =>{
     }else{
         try{
             
-            let allInfo = [];
+            let API_Videogames = [];
             let apiURL = "";
             for( let i=1; i < 6 ; i++ ){
                 apiURL = await axios.get(`https://api.rawg.io/api/games?key=${API_KEY}&page=${i}`)
@@ -65,7 +63,7 @@ const getAllVideogames = async (req,res,next) =>{
                     }
                 });
     
-                allInfo = allInfo.concat(API_map)
+                API_Videogames = API_Videogames.concat(API_map)
                
             }
            
@@ -79,23 +77,17 @@ const getAllVideogames = async (req,res,next) =>{
                     }
                 }
             })
-         
-            const DBVideogamett = JSON.parse(JSON.stringify(DBVideogames));
-            // console.log('el PArse', DBVideogamett)
-            // const DBVideogamespp = DBVideogamett.reverse()
-            DBVideogamett.map(v => {
-                v.Genres= v.Genres.map(g=> g.name)
-            })
-            // console.log('juegos creados',DBVideogamett)
-          
-            const allVideogames = DBVideogamett.concat(allInfo)
-
-            console.log('aca el get de los juegos',allVideogames)
+            
+            const DB_Videogames = JSON.parse(JSON.stringify(DBVideogames));
+            DB_Videogames.map(v => v.Genres= v.Genres.map(g=> g.name))
+            const allVideogames = DB_Videogames.concat(API_Videogames)
             res.send(allVideogames)
         }catch(err){
             next(err)
         }
     }
 };
+
+
 
 module.exports = { getAllVideogames };

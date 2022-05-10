@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react';
 import { useParams, useHistory } from 'react-router-dom';
 import {useSelector, useDispatch,} from 'react-redux';
-import {getVideogameById, clearDetails} from '../../redux/actions/index'
+import {getVideogameById, clearDetails,deleteVideogame} from '../../redux/actions/index'
 import './DetailVideogame.css'
 import Logo from '../../img/logo.png'
 
@@ -11,6 +11,7 @@ const DetailVideogame = () =>{
     const { id } = useParams()
     const dispatch = useDispatch()
     const history = useHistory()
+
     
     const handleClick = () =>{
         history.push("/Home")
@@ -23,9 +24,6 @@ const DetailVideogame = () =>{
     return(
         <div className='divTotalDetail'>
             <div className='divHomeDetail'>
-            {/* <Link style={{textDecoration:"none"}} to="/Home">
-                <p className="txtHomeDetail" onClick={() => dispatch(clearDetails())}>BACK</p>
-            </Link> */}
             <img src={Logo} alt="img" onClick={handleClick} className="LogoDetail"/>
             </div>
             {videogameDetail.name ?

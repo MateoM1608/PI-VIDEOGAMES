@@ -8,8 +8,6 @@ const getVideogame = async (req, res, next) =>{
     let videogame;
 
     try{
-        if(!id)return next({msg: 'Missing ID, please add it'});
-
         if(id[0] === 'i'){
             videogame = await Videogame.findByPk(id ,{
                 include: Genre,
@@ -39,5 +37,7 @@ const getVideogame = async (req, res, next) =>{
         next(err);
     }
 }
+
+
 
 module.exports = {getVideogame}

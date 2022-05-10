@@ -10,9 +10,9 @@ const apiGenres = async () =>{
     const genres = []
 
     const genreApi = await axios.get(`https://api.rawg.io/api/genres?key=${API_KEY}`);
-    genreApi.data.results.forEach(element => {
+    genreApi.data.results.forEach(genre => {
         genres.push({
-            name: element.name
+            name: genre.name
         })
     });
 
@@ -27,12 +27,14 @@ const apiGenres = async () =>{
 
 // RUTA PARA TRAER LOS GENEROS 
 
-const getGenres = async (req, res, next) =>{
-    await apiGenres();
+const getGenres = async (req, res) =>{
 
+    await apiGenres();
     const getAllGenres = await Genre.findAll();
-    console.log('resultado de genres',getAllGenres)
     res.send(getAllGenres);
 }
+
+
+
 
 module.exports = {getGenres};

@@ -10,9 +10,12 @@ const CreateVideogame = () => {
 
   const dispatch = useDispatch()
   const AllGenres = useSelector(state => state.genres)
-  const [errorUrl, setErrorUrl] = useState("");
-  const [errorRating, setErrorRating] = useState("");
-  const[errorName, setErrorName] = useState("")
+  const [ allErrors, setAllErrors] = useState({
+    url: "",
+    rating: "",
+    name: "",
+    date: ""
+  })
   const [estado, setEstado] = useState({
     name:"",
     released:"",
@@ -34,31 +37,46 @@ const CreateVideogame = () => {
   ]
   const validateName = (e) => {
     !/^[a-z0-9 ,.'-]+$/i.test(e)
-    ? setErrorName('That name is invalid')
-    : setErrorName("");
+    ? setAllErrors({...allErrors, name: 'That name is invalid'})
+    : setAllErrors({...allErrors, name:""});
     setEstado({
       ...estado,
       name: e})
   }
   const validateUrl = (e) => {
-    !/([a-z\-_0-9\/\:\.]*\.(jpg|jpeg|png|gif))/.test(e)
-    ? setErrorUrl('The URL is not valid')
-    : setErrorUrl("");
+    !/(^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+(?:png|jpg|jpeg|gif|svg)+$)/.test(e)
+    // !/([a-z\-_0-9\/\:\.]*\.(jpg|jpeg|png|gif))/.test(e)
+    ? setAllErrors({...allErrors, url: 'The URL is not valid'})
+    : setAllErrors({...allErrors, url: ""});
     setEstado({
       ...estado,
       image: e
     });
   }
+  const validateDate = (e) => {
+    let year = e.substring(0,4);
+    Number(year)
+    let currentYear  = new Date().getFullYear()
+    if(year >= 1900 && year <= currentYear || e === ""){
+      setAllErrors({...allErrors,date:""})
+    }else{
+      setAllErrors({...allErrors,date:"Date is wrong"})
+    }
+    setEstado({
+      ...estado,
+      released:e
+    })
+  }
   const validateRating = (e) => {
     e < 0 || e > 5
-    ? setErrorRating('The rating is from 0 to 5')
-    : setErrorRating("");
+    ? setAllErrors({...allErrors, rating: 'The rating is from 0 to 5'})
+    : setAllErrors({... allErrors, rating: ""});
     setEstado({
       ...estado,
       rating: e
     });
   }
-  const  handlerSelectGenres = (e) => {
+  const handlerSelectGenres = (e) => {
     setEstado({
         ...estado,
         Genres: estado.Genres.includes(e.target.value) || e.target.value === "" ? estado.Genres : [...estado.Genres, e.target.value]
@@ -90,12 +108,12 @@ const CreateVideogame = () => {
       ...estado,
       [e.target.name]: e.target.value
     })
+    console.log('fecha',estado)
   }
   const handleSubmit = (e) =>{
     e.preventDefault()
-    if(errorUrl === "" && errorUrl === "" && errorRating=== "" ){
+    if(allErrors.date === "" && allErrors.name === "" && allErrors.url==="" && allErrors.rating===""){
       dispatch(createVideogame(estado))
-      console.log('Videojuego creado',estado)
       setEstado({
         name:"",
         released:"",
@@ -136,7 +154,7 @@ const CreateVideogame = () => {
                   placeholder= "Name"
                   className="textbox"
                 />
-                {!errorName ? null : <span className="danger">{errorName}</span>}
+                {!allErrors.name ? null : <span className="danger">{allErrors.name}</span>}
             </div>
             <div className="rowForm">
               <div className="columForm">
@@ -145,9 +163,10 @@ const CreateVideogame = () => {
                   type="date"
                   value={estado.released}
                   name="released"
-                  onChange={(e) => handleChange(e)}
+                  onChange={(e) => validateDate(e.target.value)}
                   className="textbox"
                 />
+                { !allErrors.date ? null : <span className="danger">{allErrors.date}</span>}
               </div>
               <div className="columForm ">
                 <label className="letterForms">Description:*</label>
@@ -177,7 +196,7 @@ const CreateVideogame = () => {
                     required={true}
                     className="textbox"
                   />
-                  {!errorRating ? null : <span className="danger">{errorRating}</span>}
+                  {!allErrors.rating ? null : <span className="danger">{allErrors.rating}</span>}
                 </div>
                 <div className="columForm">
                   <label className="letterForms">Image:</label>
@@ -189,7 +208,7 @@ const CreateVideogame = () => {
                     onChange={ (e) => validateUrl(e.target.value)}
                     className="textbox inputimg"
                   />
-                  {!errorUrl ? null : <span className="danger">{errorUrl}</span>}
+                  {!allErrors.url ? null : <span className="danger">{allErrors.url}</span>}
                 </div>
               </div>
               <div className="columForm orderSelect">
@@ -234,7 +253,7 @@ const CreateVideogame = () => {
             
             <div className="divimagecreate">
               <h4 className="letterForms">Image preview</h4>
-              <img  className="imgCreate" src={estado.image === "" || errorUrl !== "" ? "https://images.unsplash.com/photo-1614179924047-e1ab49a0a0cf?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8Z2FtaW5nJTIwc2V0dXB8ZW58MHx8MHx8&w=1000&q=80" : estado.image  } alt="ssisi"/>
+              <img  className="imgCreate" src={estado.image === "" || allErrors.url !== "" ? "https://images.unsplash.com/photo-1614179924047-e1ab49a0a0cf?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8Z2FtaW5nJTIwc2V0dXB8ZW58MHx8MHx8&w=1000&q=80" : estado.image  } alt="ssisi"/>
             </div>
           </div>
           <div className="orderBtnCreate">
