@@ -18,7 +18,7 @@ const LandingPage = () => {
     return(
         <div className='screen'>
             <div  >
-            <img src={Logo} className="logoland" />
+            <img src={Logo} className="logoland" alt="logo"/>
             </div>
             <div className='position'>
                 

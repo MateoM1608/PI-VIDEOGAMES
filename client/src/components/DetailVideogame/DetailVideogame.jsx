@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react';
 import { useParams, useHistory } from 'react-router-dom';
 import {useSelector, useDispatch,} from 'react-redux';
-import {getVideogameById, clearDetails,deleteVideogame} from '../../redux/actions/index'
+import {getVideogameById, clearDetails} from '../../redux/actions/index'
 import './DetailVideogame.css'
 import Logo from '../../img/logo.png'
 

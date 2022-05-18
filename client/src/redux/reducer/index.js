@@ -14,7 +14,7 @@ function rootReducer(state = initialState, action) {
         videogames: action.payload
       };
     case "GET_VIDEOGAMES_NAME":
-      if(action.payload === "Videogame has not found"){
+      if(action.payload === "videogame not found"){
         alert("videogame not found")
       }else{
         return {
@@ -86,7 +86,6 @@ function rootReducer(state = initialState, action) {
         videogameDetail: []
       };
     case "RELOAD":
-      
       return{
         ...state,
         videogames: state.allVideogames

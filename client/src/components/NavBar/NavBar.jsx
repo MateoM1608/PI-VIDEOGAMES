@@ -15,7 +15,7 @@ const NavBar = () =>{
     return(
         <div className='divNav'>
             <Link style={{textDecoration:"none"}} to="/Home">
-            <img src={Logo} className="imgnav" onClick={() => dispatch(getVideogames())}/>
+            <img src={Logo} alt="img" className="imgnav" onClick={() => dispatch(getVideogames())}/>
             </Link>
             <div className='search'>
             <SearchBar/>

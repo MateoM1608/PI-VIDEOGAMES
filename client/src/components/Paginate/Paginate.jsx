@@ -22,7 +22,7 @@ const Paginate = ({pages, videogames, numberPages,currentPage, prevPage, nextPag
     
     return (
         <div className="order">
-            <img src={ArrowL} onClick={() => prevPage() }  className={ currentPage === 1?'flechas_hidden':'flechas'  }/>
+            <img src={ArrowL} alt="prev" onClick={() => prevPage() }  className={ currentPage === 1?'flechas_hidden':'flechas'  }/>
             {numberPages && numberPages.map(number => {
                 if(number >= prev && number <= next){
                     return(
@@ -30,10 +30,9 @@ const Paginate = ({pages, videogames, numberPages,currentPage, prevPage, nextPag
                             <button className={ number === currentPage ? 'current' : 'paginate'}  onClick={() => pages(number)}>{number}</button>
                         </div>
                     )
-
                 }
             })}
-            <img src={ArrowR} onClick={() => nextPage() }  className={ currentPage === numberPages.length?'flechas_hidden':'flechas'  } />
+            <img src={ArrowR} alt="next" onClick={() => nextPage() }  className={ currentPage === numberPages.length?'flechas_hidden':'flechas'  } />
         </div>
     )
 }

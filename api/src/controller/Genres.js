@@ -8,7 +8,6 @@ const { API_KEY } = process.env
 const apiGenres = async () =>{
 
     const genres = []
-
     const genreApi = await axios.get(`https://api.rawg.io/api/genres?key=${API_KEY}`);
     genreApi.data.results.forEach(genre => {
         genres.push({

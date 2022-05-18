@@ -45,7 +45,6 @@ const CreateVideogame = () => {
   }
   const validateUrl = (e) => {
     !/(^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+(?:png|jpg|jpeg|gif|svg)+$)/.test(e)
-    // !/([a-z\-_0-9\/\:\.]*\.(jpg|jpeg|png|gif))/.test(e)
     ? setAllErrors({...allErrors, url: 'The URL is not valid'})
     : setAllErrors({...allErrors, url: ""});
     setEstado({
@@ -70,7 +69,7 @@ const CreateVideogame = () => {
   const validateRating = (e) => {
     e < 0 || e > 5
     ? setAllErrors({...allErrors, rating: 'The rating is from 0 to 5'})
-    : setAllErrors({... allErrors, rating: ""});
+    : setAllErrors({...allErrors, rating: ""});
     setEstado({
       ...estado,
       rating: e
@@ -108,11 +107,12 @@ const CreateVideogame = () => {
       ...estado,
       [e.target.name]: e.target.value
     })
-    console.log('fecha',estado)
   }
   const handleSubmit = (e) =>{
     e.preventDefault()
-    if(allErrors.date === "" && allErrors.name === "" && allErrors.url==="" && allErrors.rating===""){
+    console.log('estados locales', estado)
+    console.log('estado error', allErrors)
+    if(allErrors.date === "" && allErrors.name === "" && allErrors.url==="" && allErrors.rating==="" && estado.name !== "" && estado.description !== "" && estado.platforms !== ""){
       dispatch(createVideogame(estado))
       setEstado({
         name:"",
@@ -150,7 +150,6 @@ const CreateVideogame = () => {
                   name="name"
                   value={estado.name}
                   onChange={(e) => validateName(e.target.value)}
-                  required={true}
                   placeholder= "Name"
                   className="textbox"
                 />
@@ -176,7 +175,6 @@ const CreateVideogame = () => {
                   name="description"
                   onChange={(e) => handleChange(e)}
                   placeholder="Description of videogame..."
-                  required={true}
                   className="textbox inputimg"
                 />
               </div>
@@ -193,7 +191,6 @@ const CreateVideogame = () => {
                     placeholder= "0.00 - 5.00"
                     min= {0.00}
                     max= {5}
-                    required={true}
                     className="textbox"
                   />
                   {!allErrors.rating ? null : <span className="danger">{allErrors.rating}</span>}
@@ -214,46 +211,42 @@ const CreateVideogame = () => {
               <div className="columForm orderSelect">
                 <label className="letterForms">Genres:</label>
                 <select className="textbox" value="" onChange={(e) => handlerSelectGenres(e)}>
-                  <option value="">Chose the genres</option>
+                  <option value="">choose the genres</option>
                   {AllGenres && AllGenres.map(g=>(
                     <option key={g.name} value={g.name}>{g.name}</option>
                   ))}
                 </select>
                 <div className="rowText">
-                  {estado.Genres.map((el) =>
-                    {if(el !== ""){
-                      return(
+                  {estado.Genres.map(el =>(
                       <div className="txtSelectrow" key={el} >
                         <p className="TextSelect">{el}</p>
                         <button  className="btndeleteSelect" onClick={() => handlerDeleteGenres(el)}>X</button>
                       </div>
-                  )}})}
+                  ))}
                 </div>
               </div>
               <div className="columForm orderSelect">
                 <label className="letterForms">Platforms:*</label>
-                <select className="textbox" value={estado.platforms[0]?estado.platforms[estado.platforms.length-1]:""} required ={true} onChange={(e) => handleSelectPlatforms(e)}>  
+                <select className="textbox" value={estado.platforms[0]?estado.platforms[estado.platforms.length-1]:""}  onChange={(e) => handleSelectPlatforms(e)}>  
                   <option value="">Choise the platfroms </option>
                   {Allplatforms.map(p => (
                     <option key={p} value={p}>{p}</option>
                   ))}
                 </select>
                 <div className="rowText">
-                  {estado.platforms.map((p) =>
-                    {if(p !== ""){
-                      return(
+                  {estado.platforms.map((p) =>(
                         <div className="txtSelectrow" key={p}>
                           <p className="TextSelect">{p}</p>
                           <button className="btndeleteSelect" onClick={() => handleDeletePlatforms(p)}>X</button>
                         </div>
-                  )}})}
+                  ))}
                 </div>
               </div>
             </div>
             
             <div className="divimagecreate">
               <h4 className="letterForms">Image preview</h4>
-              <img  className="imgCreate" src={estado.image === "" || allErrors.url !== "" ? "https://images.unsplash.com/photo-1614179924047-e1ab49a0a0cf?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8Z2FtaW5nJTIwc2V0dXB8ZW58MHx8MHx8&w=1000&q=80" : estado.image  } alt="ssisi"/>
+              <img  className="imgCreate" src={estado.image === "" || allErrors.url !== "" ? "https://images.unsplash.com/photo-1614179924047-e1ab49a0a0cf?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8Z2FtaW5nJTIwc2V0dXB8ZW58MHx8MHx8&w=1000&q=80" : estado.image  } alt="img"/>
             </div>
           </div>
           <div className="orderBtnCreate">

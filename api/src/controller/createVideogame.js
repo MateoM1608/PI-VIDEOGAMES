@@ -28,6 +28,18 @@ const createVideogame = async (req, res) =>{
     }
 }
 
+function deleteVideogame  (req, res) {
+
+    const { id } = req.params;
+
+    Videogame.destroy({
+        where:{
+            id: id
+        }
+    }).then(data => res.send('videogame is deleted')).catch(err => res.status(500).send(err))
+    
+
+}
 
 
-module.exports = {createVideogame};
+module.exports = {createVideogame, deleteVideogame};

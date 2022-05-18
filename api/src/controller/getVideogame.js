@@ -12,11 +12,11 @@ const getVideogame = async (req, res, next) =>{
             videogame = await Videogame.findByPk(id ,{
                 include: Genre,
             });
-    
+            console.log('finbypk',videogame )
             videogame = JSON.parse(JSON.stringify(videogame));
             videogame.Genres = videogame.Genres.map(g => g.name);
 
-            return videogame ? res.json(videogame) : res.status(404).send('Error no se encontro el id')
+            return videogame  ? res.json(videogame) : res.status(404).send('Error no se encontro el id')
             
         }else{
             let idApi = await axios.get(`https://api.rawg.io/api/games/${id}?key=${API_KEY}`);

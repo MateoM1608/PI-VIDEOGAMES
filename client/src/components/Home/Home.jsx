@@ -33,9 +33,9 @@ const Home = () => {
     },[dispatch])
 
    
-    let number = []
+    let numberPages = []
     for(let i = 0; i < Math.ceil(videogames.length/15); i++){   
-        number.push(i+1)
+        numberPages.push(i+1)
     }
         
     const prevPage = () =>{
@@ -44,7 +44,7 @@ const Home = () => {
         }
     }
     const nextPage = () =>{
-        if(currentPage < number.length ){
+        if(currentPage < numberPages.length ){
             pages(currentPage+1)
         }
     }
@@ -133,8 +133,7 @@ const Home = () => {
                     <div>
                         <Paginate 
                             pages={pages} 
-                            videogames={videogames} 
-                            numberPages={number} 
+                            numberPages={numberPages} 
                             currentPage={currentPage} 
                             prevPage={prevPage} 
                             nextPage={nextPage}
@@ -154,8 +153,7 @@ const Home = () => {
                         </div>
                         <Paginate 
                             pages={pages} 
-                            videogames={videogames} 
-                            numberPages={number} 
+                            numberPages={numberPages} 
                             currentPage={currentPage} 
                             prevPage={prevPage} 
                             nextPage={nextPage}

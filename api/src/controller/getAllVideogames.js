@@ -26,14 +26,14 @@ const getAllVideogames = async (req,res,next) =>{
                     name: e.name,
                     image: e.background_image,
                     rating: e.rating,
-                    platforms:e.platforms ? e.platforms.map(p => p.platform.name) : "Sorry, there are no platforms",
                     Genres: e.genres.map(g => g.name)
                 }
             }): [];
             
             const allVideogames = dataBaseVideogames.concat(APIVIdeogames)
+            console.log('todos los juegos', allVideogames)
             if(allVideogames.length === 0){
-                return res.send("Videogame not found")
+                return res.send("videogame not found")
             }
             if(allVideogames.length <= 15){
                 return res.json(allVideogames)
@@ -59,7 +59,6 @@ const getAllVideogames = async (req,res,next) =>{
                         rating: e.rating,
                         image: e.background_image,
                         Genres: e.genres.map(g=> g.name),
-                        platforms:e.platforms ? e.platforms.map(p => p.platform.name) : "Sorry, there are no platforms",
                     }
                 });
     

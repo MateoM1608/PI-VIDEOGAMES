@@ -30,7 +30,7 @@ module.exports = (sequelize) => {
       allowNull: false
     },
     image: {
-      type: DataTypes.STRING(10000)
+      type: DataTypes.TEXT
     },
     createdInDb: {
       type: DataTypes.BOOLEAN,
