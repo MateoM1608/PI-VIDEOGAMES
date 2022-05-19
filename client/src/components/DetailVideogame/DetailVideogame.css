@@ -88,3 +88,48 @@
     padding-top: 100px;
     padding-left: 100px;
 }
+
+@media (max-width: 500px){
+    .LogoDetail{
+        width: 30%;
+    }
+    .divDetailrow{
+        flex-direction: column-reverse;
+    }
+    .nameDetail{
+        font-size: 100%;
+    }
+    .titleDetail{
+        font-size: 80%;
+        margin-bottom: 30px;
+    }
+    .spaceDetail{
+        margin-top: 0px;
+    }
+    .resultDetail{
+        font-size: 60%;
+        margin-bottom: 20px;
+    }
+    .imgDetail{
+        margin-bottom: 20px;
+        margin-left: 13px;
+        width: 90%;
+        height: 90%;
+    }
+    .descDetail{
+        font-size: 10px;
+        margin: 10px;
+        text-align: center;
+    }
+    .rowDetails{
+        display: grid;
+        flex-direction: row;
+        grid-template-columns: repeat(4, 1fr);
+    }
+    .oderDetails{
+        margin-bottom: 30px;
+    }
+    .imgloadDetail{
+        width: 80% ;
+    }
+}

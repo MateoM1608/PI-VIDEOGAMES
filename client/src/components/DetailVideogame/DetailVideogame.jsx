@@ -43,9 +43,9 @@ const DetailVideogame = () =>{
                         </div>
                         <p className='titleDetail'>Platforms:</p>
                         <div className='rowDetails'> 
-                        {videogameDetail.platforms.map(p=>(
-                        <p key={p} className="oderDetails resultDetail" >{p}</p>
-                        ))}
+                            {videogameDetail.platforms.map(p=>(
+                            <p key={p} className="oderDetails resultDetail" >{p}</p>
+                            ))}
                         </div>
                     </div>
                     <div>

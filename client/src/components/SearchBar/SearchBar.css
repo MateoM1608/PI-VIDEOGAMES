@@ -21,8 +21,6 @@
 .searchbar{
     border: 1px solid transparent;
     padding: 8px 40px 7px 15px;
-    /* padding-top: 8px;
-    padding-left: 15px; */
     border-bottom-left-radius: 8px;
     border-top-left-radius: 8px;
     background-color: rgba(255, 255, 255, 0.507);
@@ -30,4 +28,21 @@
 
 .searchbar::placeholder{
     color: rgba(255, 255, 255, 0.562)
+}
+
+@media (max-width: 500px) {
+   .SearchOrder{
+       margin-left: 0%;
+       padding-right: 0%;
+       margin-bottom: 10px;
+   }
+    .searchbar{
+        padding: 0%;
+        width: 80%;
+    }
+    .btnsearch{
+        font-size: 5px;
+        padding-top: 7px;
+        padding-bottom: 2px;
+    }
 }

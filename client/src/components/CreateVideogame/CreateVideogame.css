@@ -161,3 +161,33 @@
 .inputimg{
     width: 220px;
 }
+
+@media (max-width: 500px){
+    .txtCreated{
+        font-size: 30px;
+        margin-bottom: 40px;
+    }
+    .itemsrequired{
+        font-size: 10px;
+    }
+    .orderForm{
+        flex-direction: column;
+    }
+    .AllForms{
+        margin-left: 10px;
+    }
+    .letterForms{
+        font-size: 15px;
+    }
+    .textbox{
+       width: 70%; 
+    }
+    .columForm{
+        justify-content: center;
+        align-items: center;
+    }
+    .imgCreate{
+        width: 90%;
+        margin-left: 5%;
+    }
+}

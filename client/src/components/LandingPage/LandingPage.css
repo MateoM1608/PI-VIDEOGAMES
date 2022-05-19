@@ -6,6 +6,30 @@
     display: flex;
 }
 
+@media (max-width: 500px){
+    .screen{
+        
+        object-fit: cover;
+    }
+    .logoland{
+        /* background-color: red; */
+        width: 30%;
+        
+    }
+    .title{
+        width: 50%;
+    }
+    .position{
+        padding-left: 0px;
+        padding-top: 0%;
+        float:none;
+        text-align: left;
+        transition-delay: 2s;
+        transition-delay: initial
+    }
+
+}
+
 .title{
     font-family: Helvetica;
     color: white;
