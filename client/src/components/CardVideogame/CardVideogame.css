@@ -1,5 +1,5 @@
 .divC{
-    width: 355px;
+    width: 90%;
     height: 325px;
     background-color: rgba(83, 83, 83, 0.151);
     border-radius: 10px;
@@ -8,7 +8,7 @@
 }
 
 .divC:hover{
-    width: 365px;
+    width: 95%;
     height: 335px;
     margin-bottom: -10px;
     background-color: rgb(20, 20, 20);
@@ -17,7 +17,7 @@
 
 .img{
     height: 220px;
-    width: 355px;
+    width: 100%;
     border-radius: 10px;
 }
 
